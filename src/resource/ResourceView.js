@@ -140,6 +140,7 @@ function ResourceView(element, calendar, viewName) {
 	function updateOptions() {
 		tm = opt('theme') ? 'ui' : 'fc';
 		colFormat = opt('columnFormat');
+                headerSpan = opt('headerSpan') || 1;
 
 		// week # options. (TODO: bad, logic also in other views)
 		showWeekNumbers = opt('weekNumbers');
@@ -261,11 +262,12 @@ function ResourceView(element, calendar, viewName) {
 			(showWeekNumbers && (viewName === 'resourceDay' || viewName === 'resourceWeek') ? weekTitle : "&nbsp;") + 
 			"</th>";
 		for (col=0; col<colCnt; col++) {
+                        if (col % headerSpan) continue;
 			date = indexDate(col);
 			html +=
 				"<th class='" + headerClass + " fc-id " + date.getTime() + 
 					(date.getDay() === 0 || date.getDay() === 6 ? 'fc-weekend' : '') +
-				"'>" +
+				"'" + (headerSpan > 1 ? ("colspan='"+headerSpan+"'") : "") + ">" +
 				(showWeekNumbers && (viewName === 'resourceNextWeeks' || viewName === 'resourceMonth') && 
 					date.getDay() === 1 ? "#" + formatDate(date, weekNumberFormat) + "<br>" : "") + 
 				htmlEscape(formatDate(date, colFormat)) +
