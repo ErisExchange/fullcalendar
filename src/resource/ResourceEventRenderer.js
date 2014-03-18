@@ -491,6 +491,7 @@ function ResourceEventRenderer() {
 					htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
 					"</span>";
 			}
+                        html += " "; // Putting whitespace here ensures calling .text() on the cell produces readable text.
 			html +=
 				"<span class='fc-event-title' " + (skinCss ? " style='" + skinCss + "'" : "") + ">" + htmlEscape(event.title) + "</span>" +
 				"</div>";
