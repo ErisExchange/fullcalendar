@@ -517,6 +517,10 @@ function Calendar(element, options, eventSources, resourceSources) {
 			options[name] = value;
 			updateSize();
 		}
+		if (name == 'minTime' || name == 'maxTime') {
+			options[name] = value;
+			render();
+		}
 	}
 	
 	
