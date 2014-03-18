@@ -349,7 +349,7 @@ function ResourceView(element, calendar, viewName) {
 
 		html +=
 			"<div class='fc-day-content'>" +
-			"<div style='position:relative'>&nbsp;</div>" +
+			"<div style='position:relative'></div>" +
 			"</div>" +
 			"</div>" +
 			"</td>";
