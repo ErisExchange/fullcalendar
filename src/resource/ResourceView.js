@@ -189,6 +189,7 @@ function ResourceView(element, calendar, viewName) {
 		bodyRows = body.find('tr');
 		bodyCells = body.find('td:not(td.fc-resourceName)');
 		bodyFirstCells = bodyRows.find('td:first-child:not("fc-resourceName")');
+		bodyFirstRowCells = bodyRows.eq(0).find('td:not("fc-resourceName")');
 		
 		// trigger resourceRender callback now when the skeleton is ready
 		body.find('td.fc-resourceName').each(function(i, resourceElement) {
@@ -571,7 +572,16 @@ function ResourceView(element, calendar, viewName) {
 	
 	coordinateGrid = new CoordinateGrid(function(rows, cols) {
 		var e, n, p;
-		headCells.each(function(i, _e) {
+
+		// Prefer to use bodyRows[0].cells instead of headCells
+		// if possible.  (particularly when using headerSpan option)
+		if (bodyRows.length > 0) {
+			var cells = bodyFirstRowCells;
+		} else {
+			var cells = headCells;
+		}
+
+		cells.each(function(i, _e) {
 			e = $(_e);
 			n = e.offset().left;
 			if (i) {
