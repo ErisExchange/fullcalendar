@@ -18,12 +18,12 @@ function ResourceDayView(element, calendar) {
 	
 	
 	function render(date, delta) {
-		if (delta) {
+		if (delta !== undefined) {
 			addDays(date, delta * 1);
 			if (!opt('weekends')) skipWeekend(date, delta < 0 ? -1 : 1);
 		}
 		else {
-			date = new Date();
+                        date = new Date();
 		}
 
 		var start = addMinutes(cloneDate(date, true),parseTime(opt('minTime')));
